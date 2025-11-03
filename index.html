@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nonstop Nut November</title>
+    <style>
+        body {
+            background: #18181b;
+            color: #f4f4f5;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            text-align: center;
+            padding: 2rem 1rem 1rem 1rem;
+        }
+        .banner-img {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto 1.5rem auto;
+            display: block;
+        }
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+        }
+        .desc {
+            max-width: 600px;
+            margin: 2rem auto;
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+        .datetime {
+            text-align: center;
+            margin: 1.5rem auto 0 auto;
+            font-size: 1.1rem;
+            color: #a5f3fc;
+            font-weight: 500;
+        }
+        footer {
+            text-align: center;
+            color: #888;
+            margin: 3rem 0 1rem 0;
+            font-size: 0.95rem;
+        }
+        footer a {
+            color: #7dd3fc;
+            text-decoration: underline;
+        }
+        @media (max-width: 700px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .desc {
+                font-size: 1rem;
+                margin: 1.2rem 1rem;
+            }
+            .banner-img {
+                max-width: 95vw;
+            }
+        }
+        @media (max-width: 480px) {
+            header {
+                padding: 1.2rem 0.5rem 0.5rem 0.5rem;
+            }
+            h1 {
+                font-size: 1.3rem;
+            }
+            .desc {
+                font-size: 0.95rem;
+                margin: 1rem 0.5rem;
+            }
+            .datetime {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <img src="images/Nonstop%20Banner.png" alt="Nonstop Nut November Banner" class="banner-img">
+        <h1>Nonstop Nut November</h1>
+    </header>
+    <div class="datetime" id="datetime">
+        <!-- Date and month-based message will appear here -->
+    </div>
+    <section class="desc" id="nnn-message">
+        <p>
+            Welcome to <strong>Nonstop Nut November</strong> &ndash; the only challenge where self-control is strictly <em>not</em> allowed! While others are busy with No Nut November, we’re here to celebrate the true spirit of... well, not holding back.<br><br>
+            The rules are simple: There are none. Go nuts, literally and figuratively. Remember, it’s not about winning or losing &ndash; it’s about participation. And in this case, the more, the merrier.<br><br>
+            Join the movement, embrace the chaos, and let’s make November unforgettable (and possibly exhausting).
+        </p>
+    </section>
+
+    <!-- Disqus Comments Section -->
+    <div id="disqus_thread" style="max-width: 600px; margin: 2rem auto;"></div>
+    <script>
+        var disqus_config = function () {
+            this.page.url = window.location.href;  
+            this.page.identifier = 'nonstop-nut-november'; 
+            this.page.title = document.title;
+            this.theme = 'dark'; // dark mode enabled
+        };
+        (function() { 
+            var d = document, s = d.createElement('script');
+            s.src = 'https://nnn-18.disqus.com/embed.js';
+            s.setAttribute('data-timestamp', +new Date());
+            (d.head || d.body).appendChild(s);
+        })();
+    </script>
+    <noscript>
+        Please enable JavaScript to view the 
+        <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a>
+    </noscript>
+
+    <footer>
+        &copy; 2025 Nonstop Nut November. Meme responsibly.<br>
+        Comments are powered by Disqus. Their <a href="https://disqus.com/privacy/" target="_blank">Privacy Policy</a> applies.<br>
+        <a href="https://x.com/NonstopNutN0v" target="_blank" style="color:#1DA1F2; text-decoration:none; font-size:1.2rem;">
+            <i class="fa-brands fa-twitter"></i> Follow us
+        </a>
+    </footer>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <script>
+        async function updateDateTime() {
+            try {
+                const res = await fetch('https://worldtimeapi.org/api/timezone/America/Chicago');
+                const data = await res.json();
+                const dt = new Date(data.datetime);
+                const months = ["January", "February", "March", "April", "May", "June",
+                                "July", "August", "September", "October", "November", "December"];
+                const month = months[dt.getMonth()];
+                const day = dt.getDate();
+                const year = dt.getFullYear();
+                let hour = dt.getHours();
+                let minute = dt.getMinutes();
+                let second = dt.getSeconds();
+                const ampm = hour >= 12 ? 'PM' : 'AM';
+                hour = hour % 12 || 12;
+                minute = minute < 10 ? '0' + minute : minute;
+                second = second < 10 ? '0' + second : second;
+
+                // Display date and time
+                document.getElementById('datetime').textContent =
+                    `${month} ${day}, ${year} – ${hour}:${minute}:${second} ${ampm} CST`;
+
+                // Update message based on month
+                const messageEl = document.getElementById('nnn-message');
+                if (dt.getMonth() === 10) { // November
+                    messageEl.innerHTML = `
+                        <p>
+                        Welcome to <strong>Nonstop Nut November</strong> &ndash; the only challenge where self-control is strictly <em>not</em> allowed! While others are busy with No Nut November, we’re here to celebrate the true spirit of... well, not holding back.<br><br>
+                        The rules are simple: There are none. Go nuts, literally and figuratively. Remember, it’s not about winning or losing &ndash; it’s about participation. And in this case, the more, the merrier.<br><br>
+                        Join the movement, embrace the chaos, and let’s make November unforgettable (and possibly exhausting).
+                        </p>`;
+                } else if (dt.getMonth() === 11) { // December
+                    messageEl.innerHTML = `
+                        <p>
+                        Nonstop Nut November is over.. But the fun never ends! If you want to keep on gooning − simply do so! Happy Holidays!
+                        </p>`;
+                } else { // Other months
+                    messageEl.innerHTML = `<p>Happy ${month}! Keep having fun, whatever your style!</p>`;
+                }
+
+            } catch (e) {
+                document.getElementById('datetime').textContent = "Unable to load CST time.";
+            }
+        }
+        updateDateTime();
+        setInterval(updateDateTime, 10000);
+    </script>
+</body>
+</html>
